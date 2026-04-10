@@ -1,0 +1,89 @@
+:root {
+    --primary: #e67e22; /* Naranja */
+    --secondary: #c0392b; /* Rojo */
+    --dark: #1a1a1a;
+    --light: #f4f4f4;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--dark);
+    color: var(--light);
+    margin: 0;
+    line-height: 1.6;
+}
+
+header {
+    background: #000;
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 4px solid var(--primary);
+}
+
+.logo-container h1 { color: var(--primary); margin: 0; font-size: 3rem; }
+
+nav { margin-top: 1rem; }
+.btn {
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--light);
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 5px;
+    transition: 0.3s;
+}
+
+.btn.active, .btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.category-header {
+    background: var(--secondary);
+    padding: 10px 20px;
+    margin: 2rem 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.card {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid var(--primary);
+}
+
+.special-card {
+    background: linear-gradient(45deg, #2a2a2a, #444);
+    border: 2px solid var(--primary);
+    text-align: center;
+    margin: 20px;
+}
+
+.badge {
+    background: var(--primary);
+    padding: 5px 10px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.price { color: var(--primary); font-weight: bold; font-size: 1.2rem; }
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Clases para JS */
+.filter-item { display: none; }
+.show { display: block; }
