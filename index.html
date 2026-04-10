@@ -3,91 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aki Tu Pizza - Piedecuesta</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Aki Tu Pizza | Menú Digital</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header>
-        <div class="logo-container">
-            <h1>AKI TU PIZZA</h1>
-            <p>PIEDECUESTA</p>
-        </div>
         <nav>
-            <button onclick="filterSelection('all')" class="btn active">Todo</button>
-            <button onclick="filterSelection('premium')" class="btn">Premium</button>
-            <button onclick="filterSelection('especiales')" class="btn">Especiales</button>
-            <button onclick="filterSelection('clasicas')" class="btn">Clásicas</button>
-            <button onclick="filterSelection('infantiles')" class="btn">Infantiles</button>
+            <div class="logo">AKI TU <span>PIZZA</span></div>
+            <a href="https://linktr.ee/akitupizza" class="btn-contact">Ubicación</a>
         </nav>
+        <div class="hero">
+            <h1>Sabor Artesanal en Piedecuesta</h1>
+            <p>Pizzas premium, clásicas y coctelería de autor.</p>
+        </div>
     </header>
 
-    <main id="menu-container">
-        <section class="filter-item temporada">
-            <div class="card special-card">
-                <span class="badge">TEMPORADA</span>
-                <h2>Pollo e Funghi</h2>
-                <p>Pollo salteado al ajillo, champiñones del huerto y queso di búfala.</p>
-                <p class="price">Mediana: $60.000</p>
-                <small>Disponible hasta el 30 de ABRIL. No combinable.</small>
+    <main class="container">
+        <section class="menu-section">
+            <h2 class="section-title">Nuestras Pizzas</h2>
+            <div class="filter-tabs">
+                <button class="tab-btn active" onclick="filterMenu('todas')">Todas</button>
+                <button class="tab-btn" onclick="filterMenu('premium')">Premium</button>
+                <button class="tab-btn" onclick="filterMenu('especial')">Especiales</button>
+                <button class="tab-btn" onclick="filterMenu('clasica')">Clásicas</button>
             </div>
+
+            <div id="pizza-grid" class="grid">
+                </div>
         </section>
 
-        <section class="filter-item premium">
-            <div class="category-header"><h2>Pizzas Premium</h2><p>P: $28k | M: $52k | G: $72k</p></div>
-            <div class="grid">
-                <div class="card">
-                    <h3>Sorrento</h3>
-                    <p>Mozzarella, búfala, azul danés, jamón serrano, piña caramelizada y balsámico.</p>
+        <section class="menu-section">
+            <h2 class="section-title">Bebidas y SouBar</h2>
+            <div id="bebida-grid" class="grid">
                 </div>
-                <div class="card">
-                    <h3>Ibérica</h3>
-                    <p>Chorizo español, cebolla, pimentón, aceitunas negras, anchoas y limón.</p>
-                </div>
-                <div class="card">
-                    <h3>Toscana</h3>
-                    <p>Jamón serrano, queso de búfala, tomates cherry, pesto y parmesano.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="filter-item especiales">
-            <div class="category-header"><h2>Especiales</h2><p>P: $25k | M: $47k | G: $64k</p></div>
-            <div class="grid">
-                <div class="card">
-                    <h3>Azteca</h3>
-                    <p>Salsa napolitana picante, carne molida, maíz, pimentones, cebolla y jalapeños.</p>
-                </div>
-                <div class="card">
-                    <h3>Lasaña (Pizza)</h3>
-                    <p>Salsa bechamel, carne molida, jamón, tocineta y mozzarella.</p>
-                </div>
-                <div class="card">
-                    <h3>Quattro Formaghi</h3>
-                    <p>Mozzarella, búfala, queso azul y parmesano.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="filter-item clasicas">
-            <div class="category-header"><h2>Clásicas</h2><p>P: $20k | M: $38k | G: $52k</p></div>
-            <div class="grid">
-                <div class="card"><h3>Pepperoni</h3><p>Pepperoni premium y mozzarella.</p></div>
-                <div class="card"><h3>Hawaiana</h3><p>Jamón ahumado y piña caramelizada.</p></div>
-                <div class="card"><h3>Palermo</h3><p>Pollo desmechado y champiñones.</p></div>
-            </div>
-        </section>
-
-        <section class="filter-item infantiles">
-            <div class="category-header"><h2>Infantiles</h2><p>Pequeña: $18.000</p></div>
-            <div class="grid">
-                <div class="card"><h3>Bambini</h3><p>Jamón ahumado y queso.</p></div>
-                <div class="card"><h3>Bari</h3><p>Bocadillo y queso.</p></div>
-            </div>
         </section>
     </main>
 
     <footer>
-        <p>Al combinar pizzas se cobrará la de mayor valor. | Adicional Queso: P $6k, M $8k, G $11.5k</p>
+        <p>&copy; 2024 Aki Tu Pizza Piedecuesta - Cero Alcohol, Full Actitud.</p>
     </footer>
 
     <script src="script.js"></script>
