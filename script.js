@@ -1,82 +1,80 @@
-// Base de datos de productos basada en el menú de Aki Tu Pizza
-const pizzas = [
-    // Temporada
-    { name: "Pollo e Funghi", cat: "especial", price: "60.000", desc: "Pollo al ajillo, champiñones y queso di búfala [cite: 82, 85, 89]" },
-    // Premium
-    { name: "Sorrento", cat: "premium", price: "52.000", desc: "Queso di búfala, azul, jamón serrano y piña caramelizada [cite: 91, 108]" },
-    { name: "Frutti di Mar", cat: "premium", price: "52.000", desc: "Camarones, calamar, palmitos y salsa pesto [cite: 105, 108]" },
-    { name: "Picantezza", cat: "premium", price: "52.000", desc: "Pollo, queso pepperjack, sriracha y jalapeños [cite: 95, 108]" },
-    // Especiales
-    { name: "Azteca", cat: "especial", price: "47.000", desc: "Carne molida, maíz, pimentones asados y jalapeños [cite: 118, 131]" },
-    { name: "Quattro Formaggi", cat: "especial", price: "47.000", desc: "Mozzarella, di búfala, azul y parmesano [cite: 129, 131]" },
-    { name: "Pizza Lasaña", cat: "especial", price: "47.000", desc: "Bechamel, carne molida, jamón y tocineta [cite: 137, 139]" },
-    // Clásicas
-    { name: "Hawaiana", cat: "clasica", price: "38.000", desc: "Jamón ahumado y piña caramelizada [cite: 150, 153]" },
-    { name: "Pepperoni", cat: "clasica", price: "38.000", desc: "Pepperoni premium y mozzarella [cite: 147, 153]" }
+const menuPizzas = [
+    // PREMIUM
+    { id: 1, name: "Sorrento", cat: "premium", prices: { pequena: 28000, mediana: 52000, grande: 72000 }, combinable: true },
+    { id: 2, name: "Ibérica", cat: "premium", prices: { pequena: 28000, mediana: 52000, grande: 72000 }, combinable: true },
+    { id: 3, name: "Picantezza", cat: "premium", prices: { pequena: 28000, mediana: 52000, grande: 72000 }, combinable: true },
+    
+    // ESPECIALES
+    { id: 4, name: "Azteca", cat: "especial", prices: { pequena: 25000, mediana: 47000, grande: 64000 }, combinable: true },
+    { id: 5, name: "Quattro Formaggi", cat: "especial", prices: { pequena: 25000, mediana: 47000, grande: 64000 }, combinable: true },
+    { id: 6, name: "Pizza Lasaña", cat: "especial", prices: { pequena: 25000, mediana: 47000, grande: 64000 }, combinable: false }, // NO COMBINABLE
+    
+    // TEMPORADA
+    { id: 7, name: "Pollo e Funghi", cat: "especial", prices: { mediana: 60000 }, combinable: false }, // NO COMBINABLE
+    
+    // CLASICAS
+    { id: 8, name: "Hawaiana", cat: "clasica", prices: { pequena: 20000, mediana: 38000, grande: 52000 }, combinable: true },
+    { id: 9, name: "Pepperoni", cat: "clasica", prices: { pequena: 20000, mediana: 38000, grande: 52000 }, combinable: true }
 ];
 
-const bebidas = [
-    { name: "Pink Tonic", price: "15.000", desc: "Liche, fresas, agua tónica y soda Hatsu [cite: 28, 35]" },
-    { name: "Mistero Rosso", price: "12.000", desc: "Tamarindo, Limón y Jamaica [cite: 8, 9, 10]" },
-    { name: "Jarra de Sangría", price: "60.000", desc: "Vino, frutas, ron añejo y azúcar [cite: 42, 45, 46]" },
-    { name: "Limonada de Coco", price: "15.000", desc: "Granizado refrescante de coco [cite: 61]" }
-];
-
-// Función para renderizar las tarjetas de pizza
 function renderPizzas(items) {
     const grid = document.getElementById('pizza-grid');
-    if (!grid) return; // Seguridad si el elemento no existe
-    
-    grid.innerHTML = items.map(p => `
-        <div class="card" data-category="${p.cat}">
-            <h3>${p.name}</h3>
-            <p>${p.desc}</p>
-            <div class="price">$${p.price}</div>
-            <a href="https://wa.me/573160424560?text=Hola,%20quisiera%20pedir%20la%20pizza%20${encodeURIComponent(p.name)}" 
-               target="_blank" 
-               class="btn-order">
-               Pedir por WhatsApp
-            </a>
-        </div>
-    `).join('');
+    grid.innerHTML = items.map(p => {
+        // Generar opciones de precio según disponibilidad
+        let priceHtml = p.prices.mediana ? `<span>Mediana: $${p.prices.mediana.toLocaleString()}</span>` : `<span>Consulte precio</span>`;
+        
+        return `
+            <div class="card">
+                <div class="badge">${p.combinable ? 'Combinable' : 'Individual'}</div>
+                <h3>${p.name}</h3>
+                <div class="price-list">${priceHtml}</div>
+                <button onclick="orderSingle('${p.name}')" class="btn-order">Pedir ahora</button>
+            </div>
+        `;
+    }).join('');
 }
 
-// Función de filtrado corregida
-function filterMenu(category, event) {
-    // Filtrar array
-    const filtered = category === 'todas' ? pizzas : pizzas.filter(p => p.cat === category);
-    renderPizzas(filtered);
+// LOGICA DE COMBINACIÓN
+function openComboModal() {
+    const modal = document.getElementById('comboModal');
+    const h1 = document.getElementById('half1');
+    const h2 = document.getElementById('half2');
     
-    // Manejo de la clase 'active' en los botones
-    const buttons = document.querySelectorAll('.tab-btn');
-    buttons.forEach(btn => btn.classList.remove('active'));
+    // Solo mostramos las que se pueden combinar
+    const options = menuPizzas.filter(p => p.combinable)
+        .map(p => `<option value="${p.id}">${p.name}</option>`).join('');
     
-    if (event) {
-        event.currentTarget.classList.add('active');
-    }
+    h1.innerHTML = options;
+    h2.innerHTML = options;
+    modal.style.display = 'flex';
+    updateComboPrice();
 }
 
-// Renderizar bebidas (se cargan una sola vez al inicio)
-function renderBebidas() {
-    const grid = document.getElementById('bebida-grid');
-    if (!grid) return;
-
-    grid.innerHTML = bebidas.map(b => `
-        <div class="card">
-            <h3>${b.name}</h3>
-            <p>${b.desc}</p>
-            <div class="price">$${b.price}</div>
-            <a href="https://wa.me/573160424560?text=Hola,%20quisiera%20pedir%20la%20bebida%20${encodeURIComponent(b.name)}" 
-               target="_blank" 
-               class="btn-order">
-               Pedir por WhatsApp
-            </a>
-        </div>
-    `).join('');
+function updateComboPrice() {
+    const size = document.getElementById('comboSize').value;
+    const p1 = menuPizzas.find(p => p.id == document.getElementById('half1').value);
+    const p2 = menuPizzas.find(p => p.id == document.getElementById('half2').value);
+    
+    // Regla: Se cobra la de mayor valor
+    const price1 = p1.prices[size] || 0;
+    const price2 = p2.prices[size] || 0;
+    const finalPrice = Math.max(price1, price2);
+    
+    document.getElementById('totalCombo').innerText = `Total: $${finalPrice.toLocaleString()}`;
 }
 
-// Ejecutar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-    renderPizzas(pizzas);
-    renderBebidas();
-});
+function sendComboWhatsApp() {
+    const size = document.getElementById('comboSize').value;
+    const p1 = menuPizzas.find(p => p.id == document.getElementById('half1').value).name;
+    const p2 = menuPizzas.find(p => p.id == document.getElementById('half2').value).name;
+    const total = document.getElementById('totalCombo').innerText;
+
+    const msg = `Hola Aki Tu Pizza! Quisiera pedir una pizza COMBINADA (${size.toUpperCase()}):\n- Mitad 1: ${p1}\n- Mitad 2: ${p2}\n${total}`;
+    window.open(`https://wa.me/573160424560?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function closeComboModal() {
+    document.getElementById('comboModal').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => renderPizzas(menuPizzas));
