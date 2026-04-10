@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Aki Tu Pizza – Piedecuesta</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --card: #1c1c1c;
+    --border: #2a2a2a;
+    --gold: #c8973a;
+    --gold-light: #e8b860;
+    --red: #c0392b;
+    --red-light: #e74c3c;
+    --cream: #f5ead7;
+    --text: #f0e8d8;
+    --muted: #8a8075;
+    --pill-bg: #242424;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .hero {
+    background: linear-gradient(160deg, #1a0a00 0%, #0d0d0d 60%);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(200,151,58,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner {
+    padding: 44px 24px 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #0d0d0d;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+  .hero-title span { color: var(--gold); font-style: italic; }
+  .hero-sub {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn-location {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--pill-bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: 24px;
+    text-decoration: none;
+    transition: border-color .2s, color .2s;
+  }
+  .btn-location:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-location svg { width: 14px; height: 14px; }
+
+  /* NAV TABS */
+  .nav-tabs {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    padding: 0 20px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 14px 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+    white-space: nowrap;
+  }
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* SECTIONS */
+  .section { display: none; padding: 20px 16px 100px; }
+  .section.active { display: block; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+  .section-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  /* SIZE SELECTOR */
+  .size-selector {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    background: var(--surface);
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  .size-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 9px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  .size-btn .size-icon { font-size: 18px; }
+  .size-btn .size-price { font-size: 10px; }
+  .size-btn.active {
+    background: var(--gold);
+    color: #0d0d0d;
+    font-weight: 700;
+  }
+
+  /* PIZZA CARDS */
+  .pizza-grid { display: flex; flex-direction: column; gap: 10px; }
+  .pizza-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .pizza-card:hover { border-color: var(--gold); }
+  .pizza-card.selected { border-color: var(--gold); background: #1f1a0f; }
+  .pizza-card.in-cart { border-color: var(--red); }
+  .pizza-emoji {
+    font-size: 36px;
+    flex-shrink: 0;
+    width: 52px; height: 52px;
+    background: var(--surface);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pizza-info { flex: 1; min-width: 0; }
+  .pizza-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 3px;
+  }
+  .pizza-desc {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .pizza-footer { display: flex; align-items: center; justify-content: space-between; }
+  .pizza-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .pizza-price .currency { font-size: 11px; font-weight: 400; color: var(--muted); }
+  .pizza-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 6px; }
+  .tag {
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .tag-season { background: rgba(200,151,58,0.15); color: var(--gold); }
+  .tag-nocombine { background: rgba(192,57,43,0.15); color: var(--red-light); }
+  .tag-veggie { background: rgba(46,139,87,0.15); color: #5cb87a; }
+  .tag-hot { background: rgba(192,57,43,0.15); color: var(--red-light); }
+  .tag-seafood { background: rgba(30,120,180,0.15); color: #5aabda; }
+
+  .add-btn {
+    background: var(--gold);
+    color: #0d0d0d;
+    border: none;
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: background .15s, transform .1s;
+  }
+  .add-btn:active { transform: scale(0.9); }
+  .add-btn.added { background: var(--red); color: #fff; }
+
+  /* COMBINE SECTION */
+  .combine-banner {
+    background: linear-gradient(135deg, #1a1200, #1c1c1c);
+    border: 1px solid var(--gold);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .combine-icon { font-size: 28px; }
+  .combine-text { flex: 1; }
+  .combine-text strong { color: var(--gold); font-size: 13px; display: block; margin-bottom: 2px; }
+  .combine-text span { color: var(--muted); font-size: 11px; line-height: 1.4; }
+
+  /* CATEGORY LABEL */
+  .cat-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 20px 0 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cat-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* CART */
+  .cart-bar {
+    position: fixed;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 100%; max-width: 480px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 12px 20px 20px;
+    z-index: 200;
+    display: none;
+  }
+  .cart-bar.visible { display: block; }
+  .cart-bar-inner {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cart-count {
+    background: var(--red);
+    color: #fff;
+    border-radius: 50%;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .cart-summary { flex: 1; }
+  .cart-summary .items { font-size: 12px; color: var(--muted); }
+  .cart-summary .total { font-size: 16px; font-weight: 700; color: var(--gold); }
+  .btn-whatsapp {
+    display: flex; align-items: center; gap: 8px;
+    background: #25D366;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 13px 20px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background .2s;
+  }
+  .btn-whatsapp:hover { background: #1ebe5d; }
+
+  /* CART MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 300;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface);
+    border-radius: 24px 24px 0 0;
+    width: 100%; max-width: 480px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 0 0 32px;
+    border-top: 1px solid var(--border);
+  }
+  .modal-handle {
+    width: 40px; height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 14px auto 20px;
+  }
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--cream);
+    padding: 0 20px;
+    margin-bottom: 16px;
+  }
+  .cart-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .cart-item-emoji { font-size: 24px; flex-shrink: 0; }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-size: 14px; font-weight: 600; color: var(--cream); }
+  .cart-item-details { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .cart-item-price { font-size: 15px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
+  .cart-item-remove {
+    background: none; border: none; color: var(--muted); font-size: 18px;
+    cursor: pointer; padding: 0 4px; flex-shrink: 0;
+  }
+  .cart-total-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .cart-total-label { font-size: 14px; color: var(--muted); }
+  .cart-grand-total { font-size: 22px; font-weight: 700; color: var(--gold); }
+
+  .modal-note {
+    margin: 0 20px 16px;
+    background: #1a1200;
+    border: 1px solid rgba(200,151,58,0.3);
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+  .modal-note label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; }
+  .modal-note textarea {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    width: 100%;
+    resize: none;
+    outline: none;
+    min-height: 60px;
+  }
+  .btn-send-order {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: #25D366;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    width: calc(100% - 40px);
+    margin: 0 20px;
+    transition: background .2s;
+  }
+  .btn-send-order:hover { background: #1ebe5d; }
+  .btn-clear-cart {
+    display: block;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: calc(100% - 40px);
+    margin: 10px 20px 0;
+    text-align: center;
+  }
+
+  /* BEBIDAS */
+  .drink-grid { display: flex; flex-direction: column; gap: 8px; }
+  .drink-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .drink-card:hover { border-color: var(--gold); }
+  .drink-card.in-cart { border-color: var(--red); }
+  .drink-emoji { font-size: 28px; width: 44px; height: 44px; background: var(--surface); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .drink-info { flex: 1; }
+  .drink-name { font-size: 15px; font-weight: 600; color: var(--cream); }
+  .drink-desc { font-size: 11px; color: var(--muted); line-height: 1.4; margin-top: 1px; }
+  .drink-price { font-size: 16px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
+
+  /* COMBINAR */
+  .combine-section-header {
+    background: linear-gradient(135deg, #1f1200, #1c1c1c);
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 20px;
+    border: 1px solid var(--gold);
+  }
+  .combine-section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--cream); margin-bottom: 6px;
+  }
+  .combine-section-header p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .combine-slots {
+    display: flex; gap: 8px; margin-bottom: 16px;
+  }
+  .combine-slot {
+    flex: 1;
+    background: var(--card);
+    border: 2px dashed var(--border);
+    border-radius: 14px;
+    padding: 14px 10px;
+    text-align: center;
+    min-height: 100px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .combine-slot.filled { border-style: solid; border-color: var(--gold); background: #1a1200; }
+  .combine-slot.filled-2 { border-style: solid; border-color: var(--red); background: #1a0000; }
+  .combine-slot-emoji { font-size: 26px; }
+  .combine-slot-label { font-size: 11px; color: var(--muted); }
+  .combine-slot-name { font-size: 12px; color: var(--cream); font-weight: 600; }
+  .combine-slot-remove { font-size: 18px; color: var(--muted); cursor: pointer; }
+  .combine-available { display: flex; flex-direction: column; gap: 8px; }
+  .combine-pizza-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex; align-items: center; gap: 10px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .combine-pizza-item:hover { border-color: var(--gold); }
+  .combine-pizza-item.disabled { opacity: 0.4; cursor: not-allowed; }
+  .combine-result {
+    margin-top: 20px;
+    background: linear-gradient(135deg, #1f1200, #1c1c1c);
+    border: 1px solid var(--gold);
+    border-radius: 16px;
+    padding: 18px;
+    display: none;
+  }
+  .combine-result.show { display: block; }
+  .combine-result-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--cream); margin-bottom: 8px; }
+  .combine-result-detail { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+  .combine-result-price {
+    font-size: 26px; font-weight: 700; color: var(--gold); margin-bottom: 14px;
+  }
+
+  /* NOSOTROS */
+  .about-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .about-card h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--cream); margin-bottom: 8px; }
+  .about-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .about-card a { color: var(--gold); text-decoration: none; }
+  .schedule-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .schedule-row:last-child { border-bottom: none; }
+  .schedule-day { font-size: 13px; color: var(--muted); }
+  .schedule-time { font-size: 13px; color: var(--cream); font-weight: 500; }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+  }
+  .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-state p { font-size: 14px; line-height: 1.6; }
+
+  /* Pulse animation for cart */
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+  .cart-bar.bounce { animation: pulse 0.3s ease; }
+
+  /* Loading screen */
+  .splash {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 999;
+    transition: opacity 0.5s;
+  }
+  .splash.hidden { opacity: 0; pointer-events: none; }
+  .splash-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; font-weight: 900;
+    color: var(--cream);
+  }
+  .splash-title span { color: var(--gold); font-style: italic; }
+  .splash-sub { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+  .splash-loader {
+    margin-top: 40px;
+    width: 36px; height: 36px;
+    border: 3px solid var(--border);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<!-- Splash -->
+<div class="splash" id="splash">
+  <div class="splash-title">Aki Tu <span>Pizza</span></div>
+  <div class="splash-sub">Piedecuesta</div>
+  <div class="splash-loader"></div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🍕 Pizzería Artesanal</div>
+    <div class="hero-title">Aki Tu <span>Pizza</span></div>
+    <div class="hero-sub">Piedecuesta, Santander</div>
+    <div class="hero-actions">
+      <a href="https://www.google.com/maps/place/Aki+Tu+Pizza" target="_blank" class="btn-location">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        Ver ubicación
+      </a>
+      <a href="https://wa.me/573053698712" target="_blank" class="btn-location">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.07 1.5 5.786L0 24l6.34-1.47A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 0 1-5.015-1.378l-.36-.213-3.73.866.9-3.617-.234-.373A9.77 9.77 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<div class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('pizzas')">🍕 Pizzas</button>
+  <button class="tab-btn" onclick="showTab('combinar')">🔀 Combinar</button>
+  <button class="tab-btn" onclick="showTab('bebidas')">🥤 Bebidas</button>
+  <button class="tab-btn" onclick="showTab('nosotros')">📍 Nosotros</button>
+</div>
+
+<!-- PIZZAS TAB -->
+<div id="tab-pizzas" class="section active">
+  <div class="section-title">Nuestras Pizzas</div>
+  <div class="section-desc">Masa artesanal, ingredientes frescos. Al combinar dos pizzas se cobra el precio de la de mayor valor.</div>
+
+  <div class="size-selector" id="sizeSelector">
+    <button class="size-btn" onclick="setSize('pequeña')" data-size="pequeña">
+      <span class="size-icon">🍕</span>
+      <span>Pequeña</span>
+    </button>
+    <button class="size-btn active" onclick="setSize('mediana')" data-size="mediana">
+      <span class="size-icon">🍕</span>
+      <span>Mediana</span>
+    </button>
+    <button class="size-btn" onclick="setSize('grande')" data-size="grande">
+      <span class="size-icon">🍕</span>
+      <span>Grande</span>
+    </button>
+  </div>
+
+  <div id="pizzaList"></div>
+</div>
+
+<!-- COMBINAR TAB -->
+<div id="tab-combinar" class="section">
+  <div class="combine-section-header">
+    <h2>🔀 Combiná tu pizza</h2>
+    <p>Elige dos pizzas combinables y tendrás la mitad de cada una. Se cobra el precio de la mayor. Nota: las pizzas marcadas <strong style="color:var(--red-light)">NO COMBINA</strong> no aplican.</p>
+  </div>
+
+  <div class="combine-slots">
+    <div class="combine-slot" id="slot1" onclick="selectSlot(1)">
+      <div class="combine-slot-emoji">➕</div>
+      <div class="combine-slot-label">Mitad 1</div>
+      <div class="combine-slot-name" id="slot1-name">Elige pizza</div>
+    </div>
+    <div class="combine-slot" id="slot2" onclick="selectSlot(2)">
+      <div class="combine-slot-emoji">➕</div>
+      <div class="combine-slot-label">Mitad 2</div>
+      <div class="combine-slot-name" id="slot2-name">Elige pizza</div>
+    </div>
+  </div>
+
+  <div class="size-selector" id="combineSizeSelector">
+    <button class="size-btn" onclick="setCombineSize('pequeña')" data-size="pequeña">
+      <span>Pequeña</span>
+    </button>
+    <button class="size-btn active" onclick="setCombineSize('mediana')" data-size="mediana">
+      <span>Mediana</span>
+    </button>
+    <button class="size-btn" onclick="setCombineSize('grande')" data-size="grande">
+      <span>Grande</span>
+    </button>
+  </div>
+
+  <div class="combine-result" id="combineResult">
+    <div class="combine-result-title">🎉 ¡Combinación lista!</div>
+    <div class="combine-result-detail" id="combineDetail"></div>
+    <div class="combine-result-price" id="combinePrice"></div>
+    <button class="btn-whatsapp" onclick="addCombineToCart()" style="width:100%;justify-content:center;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.07 1.5 5.786L0 24l6.34-1.47A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 0 1-5.015-1.378l-.36-.213-3.73.866.9-3.617-.234-.373A9.77 9.77 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      Agregar al pedido
+    </button>
+  </div>
+
+  <div class="cat-label">Pizzas combinables</div>
+  <div class="combine-available" id="combineList"></div>
+</div>
+
+<!-- BEBIDAS TAB -->
+<div id="tab-bebidas" class="section">
+  <div class="section-title">Bebidas</div>
+  <div class="section-desc">Sin alcohol, vinos, cócteles, cervezas y más.</div>
+  <div class="drink-grid" id="drinkList"></div>
+</div>
+
+<!-- NOSOTROS -->
+<div id="tab-nosotros" class="section">
+  <div class="section-title">Aki Tu Pizza</div>
+  <div class="section-desc">Pizzería artesanal en el corazón de Piedecuesta.</div>
+  <div class="about-card">
+    <h3>📍 Ubicación</h3>
+    <p>Piedecuesta, Santander, Colombia.<br><a href="https://www.google.com/maps/place/Aki+Tu+Pizza+-+Pizzer%C3%ADa+Artesanal+en+Piedecuesta/@7.0004044,-73.0565809,17z" target="_blank">Ver en Google Maps →</a></p>
+  </div>
+  <div class="about-card">
+    <h3>📞 Contacto</h3>
+    <p>WhatsApp: <a href="https://wa.me/573053698712">+57 305 369 8712</a></p>
+  </div>
+  <div class="about-card">
+    <h3>ℹ️ Política de combinaciones</h3>
+    <p>Al pedir una pizza combinada, se cobra el precio de la pizza de mayor valor. Algunas pizzas especiales no se pueden combinar (marcadas con el sello rojo).</p>
+  </div>
+  <div class="about-card">
+    <h3>🍫 Postre</h3>
+    <p><strong style="color:var(--cream)">Dolce Peccato</strong> — Porción de pastel de chocolate.<br><strong style="color:var(--gold)">$10.000</strong></p>
+  </div>
+  <div class="about-card">
+    <h3>🧀 Adicional de queso</h3>
+    <p>Pequeña: $6.000 &nbsp;|&nbsp; Mediana: $8.000 &nbsp;|&nbsp; Grande: $11.500</p>
+  </div>
+</div>
+
+<!-- Cart Bar -->
+<div class="cart-bar" id="cartBar">
+  <div class="cart-bar-inner">
+    <div class="cart-count" id="cartCount">0</div>
+    <div class="cart-summary">
+      <div class="items" id="cartItems">items en tu pedido</div>
+      <div class="total" id="cartTotal">$0</div>
+    </div>
+    <button class="btn-whatsapp" onclick="openCart()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.07 1.5 5.786L0 24l6.34-1.47A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 0 1-5.015-1.378l-.36-.213-3.73.866.9-3.617-.234-.373A9.77 9.77 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      Pedido
+    </button>
+  </div>
+</div>
+
+<!-- Modal Cart -->
+<div class="modal-overlay" id="cartModal" onclick="closeCartOnOverlay(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">🛒 Tu pedido</div>
+    <div id="cartModalItems"></div>
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-grand-total" id="cartGrandTotal">$0</span>
+    </div>
+    <div class="modal-note">
+      <label>📝 Nota adicional (opcional)</label>
+      <textarea id="orderNote" placeholder="Ej: sin cebolla, extra salsa..."></textarea>
+    </div>
+    <button class="btn-send-order" onclick="sendToWhatsApp()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.07 1.5 5.786L0 24l6.34-1.47A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 0 1-5.015-1.378l-.36-.213-3.73.866.9-3.617-.234-.373A9.77 9.77 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      Enviar pedido por WhatsApp
+    </button>
+    <button class="btn-clear-cart" onclick="clearCart()">Vaciar pedido</button>
+  </div>
+</div>
+
+<script>
+// ===================== DATA =====================
+const PIZZAS = {
+  temporada: [
+    { id:'pollo-funghi', name:'Pollo e Funghi', emoji:'🍄', desc:'Pollo salteado al ajillo, champiñones del huerto y queso di búfala sobre masa artesanal.', prices:{pequeña:null,mediana:60000,grande:null}, tags:['season','nocombine'], combinable:false }
+  ],
+  premium: [
+    { id:'sorrento', name:'Sorrento', emoji:'🫐', desc:'Mozzarella, queso di búfala, queso azul danés, jamón serrano, piña caramelizada y reducción de vinagre balsámico.', prices:{pequeña:28000,mediana:52000,grande:72000}, tags:[], combinable:true },
+    { id:'iberica', name:'Ibérica', emoji:'🫒', desc:'Chorizo español madurado, cebollas, pimentón rojo, aceitunas negras, anchoas y ralladura de limón.', prices:{pequeña:28000,mediana:52000,grande:72000}, tags:[], combinable:true },
+    { id:'pompeya', name:'Pompeya', emoji:'🌽', desc:'Carne desmechada, maíz, chorizo especial y maduro caramelizado.', prices:{pequeña:28000,mediana:52000,grande:72000}, tags:[], combinable:true },
+    { id:'picantezza', name:'Picantezza', emoji:'🌶️', desc:'Pollo desmechado, queso Pepperjack, salsa sriracha, cebolla, tomates deshidratados, jalapeños, sour cream y cilantro.', prices:{pequeña:28000,mediana:52000,grande:72000}, tags:['hot','nocombine'], combinable:false },
+    { id:'vittoria', name:'Vittoria', emoji:'🍯', desc:'Chorizo español, tocineta, jamón serrano y miel de ajo picante.', prices:{pequeña:28000,mediana:52000,grande:72000}, tags:[], combinable:true },
+    { id:'ferrara', name:'Ferrara', emoji:'🥓', desc:'Tocineta ahumada, cábano, pepperoni, chorizo especial y salsa BBQ.', prices:{pequeña:28000,mediana:52000,grande:72000}, tags:[], combinable:true },
+    { id:'toscana', name:'Toscana', emoji:'🌿', desc:'Jamón serrano, queso de búfala, tomates cherry, salsa pesto y queso parmesano.', prices:{pequeña:28000,mediana:52000,grande:72000}, tags:[], combinable:true },
+    { id:'livorno', name:'Livorno', emoji:'🍄', desc:'Chorizo bañado en chimichurri, cábano, tocineta y champiñones.', prices:{pequeña:28000,mediana:52000,grande:72000}, tags:[], combinable:true },
+    { id:'frutti-di-mar', name:'Frutti di Mar', emoji:'🦐', desc:'Camarones, anillos de calamar al ajillo, palmitos de cangrejo, pimentones asados, cebolla grille y salsa pesto.', prices:{pequeña:28000,mediana:52000,grande:72000}, tags:['seafood','nocombine'], combinable:false }
+  ],
+  especiales: [
+    { id:'milan', name:'Milán', emoji:'🥩', desc:'Carne molida, tocineta ahumada, jamón ahumado, cebolla roja y salsa BBQ.', prices:{pequeña:25000,mediana:47000,grande:64000}, tags:[], combinable:true },
+    { id:'olivia', name:'Olivia', emoji:'🫒', desc:'Chorizo español madurado, cebollas, pimentón rojo y aceitunas negras.', prices:{pequeña:25000,mediana:47000,grande:64000}, tags:[], combinable:true },
+    { id:'turin', name:'Turín', emoji:'🍍', desc:'Pollo desmechado, tocineta, piña y salsa tártara.', prices:{pequeña:25000,mediana:47000,grande:64000}, tags:[], combinable:true },
+    { id:'florencia', name:'Florencia', emoji:'🌿', desc:'Tocineta ahumada, champiñones, tomates deshidratados, salsa pesto y queso parmesano.', prices:{pequeña:25000,mediana:47000,grande:64000}, tags:[], combinable:true },
+    { id:'roma', name:'Roma', emoji:'🍗', desc:'Pollo desmechado, jamón ahumado, maíz, champiñones al ajillo y cebolla roja.', prices:{pequeña:25000,mediana:47000,grande:64000}, tags:[], combinable:true },
+    { id:'capri', name:'Capri', emoji:'🦐', desc:'Pollo desmechado, camarones, vinagre balsámico y queso parmesano.', prices:{pequeña:25000,mediana:47000,grande:64000}, tags:[], combinable:true },
+    { id:'azteca', name:'Azteca', emoji:'🌶️', desc:'Salsa napolitana picante, carne molida, maíz, pimentones asados, cebolla grille y jalapeños.', prices:{pequeña:25000,mediana:47000,grande:64000}, tags:['hot'], combinable:true },
+    { id:'roquefori', name:'Roquefori', emoji:'🧀', desc:'Queso azul, champiñones al ajillo y tomates cherry.', prices:{pequeña:25000,mediana:47000,grande:64000}, tags:['veggie'], combinable:true },
+    { id:'quattro', name:'Quattro Formaghi', emoji:'🧀', desc:'Queso mozzarella, queso di búfala, queso azul y queso parmesano.', prices:{pequeña:25000,mediana:47000,grande:64000}, tags:['veggie'], combinable:true },
+    { id:'lasagna', name:'Pizza que se cree lasaña', emoji:'🍝', desc:'Salsa bechamel, carne molida, jamón, tocineta ahumada y queso mozzarella.', prices:{pequeña:25000,mediana:47000,grande:64000}, tags:['nocombine'], combinable:false }
+  ],
+  clasicas: [
+    { id:'pepperoni', name:'Pepperoni', emoji:'🍕', desc:'Pepperoni premium.', prices:{pequeña:20000,mediana:38000,grande:52000}, tags:[], combinable:true },
+    { id:'sicilia', name:'Sicilia', emoji:'🥓', desc:'Tocineta ahumada y maíz.', prices:{pequeña:20000,mediana:38000,grande:52000}, tags:[], combinable:true },
+    { id:'palermo', name:'Palermo', emoji:'🍗', desc:'Pollo desmechado y champiñones.', prices:{pequeña:20000,mediana:38000,grande:52000}, tags:[], combinable:true },
+    { id:'hawaiana', name:'Hawaiana', emoji:'🍍', desc:'Jamón ahumado y piña caramelizada.', prices:{pequeña:20000,mediana:38000,grande:52000}, tags:[], combinable:true },
+    { id:'verona', name:'Verona', emoji:'🌿', desc:'Champiñones, tomates deshidratados, pimentones asados, cebolla grille y maíz.', prices:{pequeña:20000,mediana:38000,grande:52000}, tags:['veggie'], combinable:true }
+  ],
+  infantiles: [
+    { id:'bambini', name:'Bambini', emoji:'🧡', desc:'Jamón ahumado y queso.', prices:{pequeña:18000,mediana:null,grande:null}, tags:[], combinable:false },
+    { id:'margarita-inf', name:'Margarita', emoji:'🌿', desc:'Salsa pesto y queso.', prices:{pequeña:18000,mediana:null,grande:null}, tags:['veggie'], combinable:false },
+    { id:'bari', name:'Bari', emoji:'🍬', desc:'Bocadillo y queso.', prices:{pequeña:18000,mediana:null,grande:null}, tags:[], combinable:false },
+    { id:'piombino', name:'Piombino', emoji:'🍗', desc:'Pollo desmechado y queso.', prices:{pequeña:18000,mediana:null,grande:null}, tags:[], combinable:false }
+  ]
+};
+
+const BEBIDAS = [
+  { cat:'🌿 Sin Alcohol – SouBar', items:[
+    { id:'sorella', name:'Sorella', emoji:'🍉', desc:'Sandía, granadina, soda Hatsu, limón y hierbabuena.', price:null, priceNote:'Consultar' },
+    { id:'mistero-rosso', name:'Mistero Rosso', emoji:'🌺', desc:'Tamarindo, limón y jamaica.', price:12000 },
+    { id:'punch', name:'Punch (Bretaña)', emoji:'🍊', desc:'Manzana, maracuyá, frutos rojos y trozos de piña.', price:12000 },
+    { id:'lulada', name:'Lulada (Bretaña)', emoji:'🫙', desc:'Syrup de lulo con jengibre, hierbabuena y limón.', price:12000 },
+    { id:'frutos-amarillos', name:'Frutos Amarillos (Bretaña)', emoji:'🥭', desc:'Uchuvas, durazno, mango y maracuyá.', price:12000 },
+    { id:'pink-tonic', name:'Pink Tonic (Hatsu)', emoji:'🍓', desc:'Syrup de lichee, limón, fresas, cerezas, agua tónica y soda Hatsu de frambuesa.', price:15000 },
+    { id:'frutos-rojos', name:'Frutos Rojos (Hatsu)', emoji:'🍒', desc:'Syrup de frutos rojos, limón, fresas y cerezas con soda Hatsu de sandía y albahaca.', price:15000 },
+    { id:'mango-biche', name:'Mango Biche (Hatsu)', emoji:'🥭', desc:'Syrup de mango biche, limón y hierbabuena con soda Hatsu de limón y hierbabuena.', price:15000 }
+  ]},
+  { cat:'🍷 Vinos', items:[
+    { id:'copa-vino', name:'Copa de Vino', emoji:'🍷', desc:'Vino tinto o blanco.', price:10000 },
+    { id:'sangria', name:'Sangría', emoji:'🍷', desc:'Jugo de frutas, azúcar, ron añejo, vino tinto o blanco.', price:20000 },
+    { id:'tinto-verano', name:'Tinto de Verano', emoji:'🍊', desc:'Vino tinto, limón y ginger ale.', price:16000 },
+    { id:'jarra-sangria', name:'Jarra de Sangría (4 copas)', emoji:'🫙', desc:'Frutas picadas, jugo de frutas, azúcar, ron añejo y vino tinto.', price:60000 }
+  ]},
+  { cat:'🍸 Cócteles', items:[
+    { id:'pina-colada', name:'Piña Colada', emoji:'🍍', desc:'Clásico tropical.', price:25000 },
+    { id:'vodka-citric', name:'Vodka Citric', emoji:'🍋', desc:'Vodka y cítricos.', price:25000 },
+    { id:'gin-tonic-g', name:"Gin Tonic (Gordon's)", emoji:'🫚', desc:"Con Gordon's Gin.", price:19000 },
+    { id:'gin-tonic-t', name:'Gin Tonic (Tanqueray)', emoji:'🫚', desc:'Con Tanqueray.', price:28000 },
+    { id:'tequila-sunrise', name:'Tequila Sunrise', emoji:'🌅', desc:'Tequila, jugo de naranja y granadina.', price:25000 },
+    { id:'margarita', name:'Margarita', emoji:'🍋', desc:'Clásica con tequila.', price:20000 },
+    { id:'tom-collins', name:'Tom Collins', emoji:'🍋', desc:'Gin, limón, azúcar y soda.', price:18000 },
+    { id:'caipiroska', name:'Caipiroska', emoji:'🍋', desc:'Vodka, limón y azúcar.', price:20000 },
+    { id:'mojito', name:'Mojito Cubano', emoji:'🌿', desc:'Ron, hierbabuena, limón, azúcar y soda.', price:18000 },
+    { id:'cuba-libre', name:'Cuba Libre', emoji:'🥤', desc:'Ron, Coca-Cola y limón.', price:16000 }
+  ]},
+  { cat:'🍺 Cervezas', items:[
+    { id:'3cord', name:'3 Cordilleras', emoji:'🍺', desc:'Cerveza artesanal premium.', price:7000 },
+    { id:'heineken', name:'Heineken', emoji:'🍺', desc:'', price:5500 },
+    { id:'stella', name:'Stella Artois', emoji:'🍺', desc:'', price:9000 },
+    { id:'coronita', name:'Coronita', emoji:'🍺', desc:'', price:6500 },
+    { id:'club-col', name:'Club Colombia', emoji:'🍺', desc:'', price:7000 },
+    { id:'aguila', name:'Águila', emoji:'🍺', desc:'', price:6000 }
+  ]},
+  { cat:'🧊 Granizados', items:[
+    { id:'gran-limonada', name:'Granizado Limonada', emoji:'🍋', desc:'', price:7000 },
+    { id:'gran-naranjada', name:'Granizado Naranjada', emoji:'🍊', desc:'', price:7000 },
+    { id:'gran-maracuya', name:'Granizado Maracuyá', emoji:'🟡', desc:'', price:9000 },
+    { id:'gran-hierba', name:'Granizado Limonada Hierbabuena', emoji:'🌿', desc:'', price:8000 },
+    { id:'gran-cerezas', name:'Granizado Limonada Cerezas', emoji:'🍒', desc:'', price:10000 },
+    { id:'passitano', name:'Passitano', emoji:'🍍', desc:'Piña, mango y maracuyá.', price:12000 },
+    { id:'fratello', name:'Fratello', emoji:'🍊', desc:'Piña, naranja, limón y granadina.', price:12000 },
+    { id:'gran-coco', name:'Granizado Limonada de Coco', emoji:'🥥', desc:'', price:15000 }
+  ]},
+  { cat:'🥤 Hatsu & Gaseosas', items:[
+    { id:'hatsu-agua', name:'Hatsu Agua', emoji:'💧', desc:'', price:6000 },
+    { id:'hatsu-soda', name:'Hatsu Soda', emoji:'🫧', desc:'', price:5000 },
+    { id:'hatsu-te', name:'Hatsu Té', emoji:'🍵', desc:'', price:7000 },
+    { id:'bretana', name:'Bretaña', emoji:'🥤', desc:'', price:5000 },
+    { id:'canada-dry', name:'Canada Dry', emoji:'🥤', desc:'', price:5000 },
+    { id:'gaseosa-400', name:'Gaseosa 400ml', emoji:'🥤', desc:'', price:5500 }
+  ]}
+];
+
+// ===================== STATE =====================
+let cart = [];
+let currentSize = 'mediana';
+let combineSize = 'mediana';
+let combineSlots = [null, null];
+let activeSlot = null;
+let cartId = 0;
+
+// ===================== RENDER =====================
+function formatPrice(n) { return '$' + n.toLocaleString('es-CO'); }
+
+function getPriceForSize(pizza, size) {
+  return pizza.prices[size];
+}
+
+function renderPizzas() {
+  const container = document.getElementById('pizzaList');
+  const cats = [
+    { key:'temporada', label:'⭐ Pizza de Temporada' },
+    { key:'premium', label:'🥇 Premium' },
+    { key:'especiales', label:'✨ Especiales' },
+    { key:'clasicas', label:'🍕 Clásicas' },
+    { key:'infantiles', label:'👶 Infantiles' }
+  ];
+  let html = '';
+  for (const cat of cats) {
+    const pizzas = PIZZAS[cat.key];
+    html += `<div class="cat-label">${cat.label}</div><div class="pizza-grid">`;
+    for (const pizza of pizzas) {
+      const price = getPriceForSize(pizza, currentSize);
+      const priceStr = price ? formatPrice(price) : '—';
+      const inCart = cart.some(c => c.id === pizza.id + '_' + currentSize);
+      let tagHtml = '';
+      if (pizza.tags.includes('season')) tagHtml += '<span class="tag tag-season">Temporada</span>';
+      if (pizza.tags.includes('nocombine')) tagHtml += '<span class="tag tag-nocombine">No combina</span>';
+      if (pizza.tags.includes('veggie')) tagHtml += '<span class="tag tag-veggie">Vegetariana</span>';
+      if (pizza.tags.includes('hot')) tagHtml += '<span class="tag tag-hot">🌶 Picante</span>';
+      if (pizza.tags.includes('seafood')) tagHtml += '<span class="tag tag-seafood">Mariscos</span>';
+      html += `
+        <div class="pizza-card ${inCart?'in-cart':''}" id="pcard-${pizza.id}">
+          <div class="pizza-emoji">${pizza.emoji}</div>
+          <div class="pizza-info">
+            ${tagHtml ? `<div class="pizza-tags">${tagHtml}</div>` : ''}
+            <div class="pizza-name">${pizza.name}</div>
+            <div class="pizza-desc">${pizza.desc}</div>
+            <div class="pizza-footer">
+              <div class="pizza-price">${priceStr} <span class="currency">${cat.key==='infantiles'?'pequeña':currentSize}</span></div>
+              <button class="add-btn ${inCart?'added':''}" onclick="addPizzaToCart('${pizza.id}','${cat.key}')" ${!price?'disabled':''}>
+                ${inCart ? '✓' : '+'}
+              </button>
+            </div>
+          </div>
+        </div>`;
+    }
+    html += '</div>';
+  }
+  container.innerHTML = html;
+}
+
+function renderCombineList() {
+  const container = document.getElementById('combineList');
+  let html = '';
+  const allCombinable = [];
+  for (const cat of ['clasicas','especiales','premium']) {
+    for (const p of PIZZAS[cat]) {
+      if (p.combinable) allCombinable.push(p);
+    }
+  }
+  for (const pizza of allCombinable) {
+    const price = getPriceForSize(pizza, combineSize);
+    const inSlot = combineSlots.includes(pizza.id);
+    html += `
+      <div class="combine-pizza-item ${inSlot?'disabled':''}" onclick="addToSlot('${pizza.id}')">
+        <span style="font-size:24px">${pizza.emoji}</span>
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:600;color:var(--cream)">${pizza.name}</div>
+          <div style="font-size:11px;color:var(--muted)">${pizza.desc.substring(0,60)}…</div>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:var(--gold)">${price?formatPrice(price):'—'}</div>
+      </div>`;
+  }
+  container.innerHTML = html;
+}
+
+function renderDrinks() {
+  const container = document.getElementById('drinkList');
+  let html = '';
+  for (const group of BEBIDAS) {
+    html += `<div class="cat-label">${group.cat}</div>`;
+    for (const d of group.items) {
+      const inCart = cart.some(c => c.id === 'beb_' + d.id);
+      html += `
+        <div class="drink-card ${inCart?'in-cart':''}" id="dcard-${d.id}">
+          <div class="drink-emoji">${d.emoji}</div>
+          <div class="drink-info">
+            <div class="drink-name">${d.name}</div>
+            ${d.desc ? `<div class="drink-desc">${d.desc}</div>` : ''}
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+            <div class="drink-price">${d.price ? formatPrice(d.price) : (d.priceNote || '—')}</div>
+            ${d.price ? `<button class="add-btn ${inCart?'added':''}" onclick="addDrinkToCart('${d.id}')">${inCart?'✓':'+'}</button>` : ''}
+          </div>
+        </div>`;
+    }
+  }
+  container.innerHTML = html;
+}
+
+// ===================== ACTIONS =====================
+function setSize(size) {
+  currentSize = size;
+  document.querySelectorAll('#sizeSelector .size-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.size === size);
+  });
+  renderPizzas();
+}
+
+function setCombineSize(size) {
+  combineSize = size;
+  document.querySelectorAll('#combineSizeSelector .size-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.size === size);
+  });
+  renderCombineList();
+  updateCombineResult();
+}
+
+function getAllPizzas() {
+  return Object.values(PIZZAS).flat();
+}
+
+function addPizzaToCart(pizzaId, cat) {
+  const pizza = getAllPizzas().find(p => p.id === pizzaId);
+  if (!pizza) return;
+  const size = cat === 'infantiles' ? 'pequeña' : currentSize;
+  const price = getPriceForSize(pizza, size);
+  if (!price) return;
+  const uid = pizza.id + '_' + size;
+  const existing = cart.find(c => c.id === uid);
+  if (existing) {
+    cart = cart.filter(c => c.id !== uid);
+  } else {
+    cart.push({ id: uid, name: pizza.name, emoji: pizza.emoji, size, price, type:'pizza', qty:1 });
+  }
+  renderPizzas();
+  updateCartBar();
+}
+
+function addDrinkToCart(drinkId) {
+  const drink = BEBIDAS.flatMap(g => g.items).find(d => d.id === drinkId);
+  if (!drink || !drink.price) return;
+  const uid = 'beb_' + drinkId;
+  const existing = cart.find(c => c.id === uid);
+  if (existing) {
+    cart = cart.filter(c => c.id !== uid);
+  } else {
+    cart.push({ id: uid, name: drink.name, emoji: drink.emoji, size:'', price: drink.price, type:'bebida', qty:1 });
+  }
+  renderDrinks();
+  updateCartBar();
+}
+
+// COMBINAR
+function selectSlot(n) {
+  activeSlot = n;
+}
+
+function addToSlot(pizzaId) {
+  if (!activeSlot) { activeSlot = combineSlots[0] ? 2 : 1; }
+  if (combineSlots.includes(pizzaId)) return;
+  combineSlots[activeSlot - 1] = pizzaId;
+  activeSlot = activeSlot === 1 ? 2 : 1;
+  updateCombineSlots();
+  updateCombineResult();
+  renderCombineList();
+}
+
+function updateCombineSlots() {
+  for (let i = 0; i < 2; i++) {
+    const slot = document.getElementById(`slot${i+1}`);
+    const nameEl = document.getElementById(`slot${i+1}-name`);
+    const pid = combineSlots[i];
+    if (pid) {
+      const pizza = getAllPizzas().find(p => p.id === pid);
+      slot.className = `combine-slot ${i===0?'filled':'filled-2'}`;
+      slot.querySelector('.combine-slot-emoji').textContent = pizza.emoji;
+      nameEl.textContent = pizza.name;
+    } else {
+      slot.className = 'combine-slot';
+      slot.querySelector('.combine-slot-emoji').textContent = '➕';
+      nameEl.textContent = 'Elige pizza';
+    }
+  }
+}
+
+function updateCombineResult() {
+  const result = document.getElementById('combineResult');
+  if (!combineSlots[0] || !combineSlots[1]) { result.classList.remove('show'); return; }
+  const p1 = getAllPizzas().find(p => p.id === combineSlots[0]);
+  const p2 = getAllPizzas().find(p => p.id === combineSlots[1]);
+  const price1 = getPriceForSize(p1, combineSize) || 0;
+  const price2 = getPriceForSize(p2, combineSize) || 0;
+  const finalPrice = Math.max(price1, price2);
+  document.getElementById('combineDetail').textContent = `${p1.name} + ${p2.name} | ${combineSize} | Se cobra el precio mayor`;
+  document.getElementById('combinePrice').textContent = formatPrice(finalPrice);
+  result.classList.add('show');
+}
+
+function addCombineToCart() {
+  if (!combineSlots[0] || !combineSlots[1]) return;
+  const p1 = getAllPizzas().find(p => p.id === combineSlots[0]);
+  const p2 = getAllPizzas().find(p => p.id === combineSlots[1]);
+  const price1 = getPriceForSize(p1, combineSize) || 0;
+  const price2 = getPriceForSize(p2, combineSize) || 0;
+  const finalPrice = Math.max(price1, price2);
+  const uid = `combo_${combineSlots[0]}_${combineSlots[1]}_${combineSize}`;
+  cart.push({
+    id: uid,
+    name: `Combinada: ${p1.name} + ${p2.name}`,
+    emoji: '🔀',
+    size: combineSize,
+    price: finalPrice,
+    type: 'combo',
+    qty: 1
+  });
+  combineSlots = [null, null];
+  updateCombineSlots();
+  document.getElementById('combineResult').classList.remove('show');
+  renderCombineList();
+  updateCartBar();
+  showTab('pizzas');
+}
+
+// ===================== CART =====================
+function updateCartBar() {
+  const bar = document.getElementById('cartBar');
+  if (cart.length === 0) { bar.classList.remove('visible'); return; }
+  bar.classList.add('visible');
+  const total = cart.reduce((s,c) => s + c.price * c.qty, 0);
+  document.getElementById('cartCount').textContent = cart.reduce((s,c) => s + c.qty, 0);
+  document.getElementById('cartItems').textContent = `${cart.length} producto${cart.length>1?'s':''} en tu pedido`;
+  document.getElementById('cartTotal').textContent = formatPrice(total);
+  bar.classList.add('bounce');
+  setTimeout(() => bar.classList.remove('bounce'), 300);
+}
+
+function openCart() {
+  renderCartModal();
+  document.getElementById('cartModal').classList.add('open');
+}
+
+function closeCartOnOverlay(e) {
+  if (e.target === document.getElementById('cartModal')) {
+    document.getElementById('cartModal').classList.remove('open');
+  }
+}
+
+function renderCartModal() {
+  const container = document.getElementById('cartModalItems');
+  if (cart.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="icon">🛒</div><p>Tu pedido está vacío.<br>Agrega pizzas y bebidas.</p></div>';
+    document.getElementById('cartGrandTotal').textContent = '$0';
+    return;
+  }
+  let html = '';
+  for (const item of cart) {
+    html += `
+      <div class="cart-item">
+        <span class="cart-item-emoji">${item.emoji}</span>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-details">${item.size ? item.size.charAt(0).toUpperCase() + item.size.slice(1) : ''}</div>
+        </div>
+        <div class="cart-item-price">${formatPrice(item.price)}</div>
+        <button class="cart-item-remove" onclick="removeCartItem('${item.id}')">✕</button>
+      </div>`;
+  }
+  container.innerHTML = html;
+  const total = cart.reduce((s,c) => s + c.price * c.qty, 0);
+  document.getElementById('cartGrandTotal').textContent = formatPrice(total);
+}
+
+function removeCartItem(id) {
+  cart = cart.filter(c => c.id !== id);
+  renderCartModal();
+  updateCartBar();
+  renderPizzas();
+  renderDrinks();
+}
+
+function clearCart() {
+  cart = [];
+  document.getElementById('cartModal').classList.remove('open');
+  updateCartBar();
+  renderPizzas();
+  renderDrinks();
+}
+
+function sendToWhatsApp() {
+  if (cart.length === 0) return;
+  const note = document.getElementById('orderNote').value.trim();
+  let msg = '🍕 *Pedido - Aki Tu Pizza Piedecuesta*\n\n';
+  for (const item of cart) {
+    const size = item.size ? ` (${item.size})` : '';
+    msg += `• ${item.name}${size}: ${formatPrice(item.price)}\n`;
+  }
+  const total = cart.reduce((s,c) => s + c.price * c.qty, 0);
+  msg += `\n💰 *Total estimado: ${formatPrice(total)}*`;
+  if (note) msg += `\n\n📝 Nota: ${note}`;
+  msg += '\n\n¡Gracias! 😊';
+  const encoded = encodeURIComponent(msg);
+  window.open(`https://wa.me/573053698712?text=${encoded}`, '_blank');
+}
+
+// ===================== TABS =====================
+function showTab(tab) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`tab-${tab}`).classList.add('active');
+  const idx = ['pizzas','combinar','bebidas','nosotros'].indexOf(tab);
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  if (tab === 'combinar') renderCombineList();
+}
+
+// ===================== INIT =====================
+window.addEventListener('load', () => {
+  renderPizzas();
+  renderDrinks();
+  renderCombineList();
+  setTimeout(() => {
+    document.getElementById('splash').classList.add('hidden');
+  }, 1200);
+});
+</script>
+</body>
+</html>
