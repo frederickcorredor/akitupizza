@@ -21,18 +21,47 @@
     </header>
 
     <main class="container">
-        <section class="menu-section">
-            <h2 class="section-title">Nuestras Pizzas</h2>
-           <div class="filter-tabs">
-    <button class="tab-btn active" onclick="filterMenu('todas', event)">Todas</button>
-    <button class="tab-btn" onclick="filterMenu('premium', event)">Premium</button>
-    <button class="tab-btn" onclick="filterMenu('especial', event)">Especiales</button>
-    <button class="tab-btn" onclick="filterMenu('clasica', event)">Clásicas</button>
-</div>
+<section class="menu-section">
+    <h2 class="section-title">Nuestras Pizzas</h2>
+    <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterMenu('todas', event)">Todas</button>
+        <button class="tab-btn" onclick="filterMenu('premium', event)">Premium</button>
+        <button class="tab-btn" onclick="filterMenu('especial', event)">Especiales</button>
+        <button class="tab-btn" onclick="filterMenu('clasica', event)">Clásicas</button>
+        <button class="tab-btn highlight" onclick="openComboModal()">🍕 Combinar (2 Sabores)</button>
+    </div>
 
-            <div id="pizza-grid" class="grid">
-                </div>
-        </section>
+    <div id="pizza-grid" class="grid"></div>
+</section>
+
+<div id="comboModal" class="modal">
+    <div class="modal-content">
+        <h3>Arma tu Pizza Mitad y Mitad</h3>
+        <p>Recuerda: Se cobrará el precio de la pizza de mayor valor.</p>
+        
+        <label>Tamaño:</label>
+        <select id="comboSize" onchange="updateComboPrice()">
+            <option value="pequena">Pequeña (4 porciones)</option>
+            <option value="mediana" selected>Mediana (8 porciones)</option>
+            <option value="grande">Grande (12 porciones)</option>
+        </select>
+
+        <div class="combo-selection">
+            <div>
+                <label>Mitad 1:</label>
+                <select id="half1" onchange="updateComboPrice()"></select>
+            </div>
+            <div>
+                <label>Mitad 2:</label>
+                <select id="half2" onchange="updateComboPrice()"></select>
+            </div>
+        </div>
+
+        <div id="totalCombo" class="price">Total: $0</div>
+        <button class="btn-order" onclick="sendComboWhatsApp()">Pedir Combinada</button>
+        <button class="btn-close" onclick="closeComboModal()">Cerrar</button>
+    </div>
+</div>
 
         <section class="menu-section">
             <h2 class="section-title">Bebidas y SouBar</h2>
