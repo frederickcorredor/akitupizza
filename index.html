@@ -76,7 +76,7 @@
   .cat-label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin: 20px 0 10px; display: flex; align-items: center; gap: 8px; }
   .cat-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  /* SIZE SELECTOR — muestra precio en cada botón */
+  /* SIZE SELECTOR */
   .size-selector { display: flex; gap: 8px; margin-bottom: 20px; }
   .size-btn {
     flex: 1; background: var(--card); border: 2px solid var(--border); color: var(--muted);
@@ -115,7 +115,7 @@
   .tag-hot { background: rgba(192,57,43,0.15); color: var(--red-light); }
   .tag-seafood { background: rgba(30,120,180,0.15); color: #5aabda; }
 
-  /* QTY CONTROL on pizza cards */
+  /* QTY CONTROL */
   .qty-control { display: flex; align-items: center; gap: 0; }
   .qty-btn { background: var(--surface); border: 1px solid var(--border); color: var(--cream); width: 30px; height: 30px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; font-weight: 700; }
   .qty-btn:first-child { border-radius: 8px 0 0 8px; }
@@ -124,25 +124,11 @@
   .qty-btn.minus { border-color: var(--red); background: rgba(192,57,43,0.15); color: var(--red-light); }
   .qty-display { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); min-width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--cream); }
 
-  /* ===================== COMBINE TAB ===================== */
-  /* Step indicator */
-  .steps-bar {
-    display: flex; align-items: center; gap: 0; margin-bottom: 24px;
-    background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
-  }
-  .step {
-    flex: 1; padding: 12px 8px; text-align: center;
-    border-right: 1px solid var(--border); transition: background .3s;
-    cursor: default;
-  }
+  /* COMBINE TAB */
+  .steps-bar { display: flex; align-items: center; gap: 0; margin-bottom: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .step { flex: 1; padding: 12px 8px; text-align: center; border-right: 1px solid var(--border); transition: background .3s; cursor: default; }
   .step:last-child { border-right: none; }
-  .step .step-num {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: var(--border); color: var(--muted);
-    font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 4px;
-    transition: background .3s, color .3s;
-  }
+  .step .step-num { width: 22px; height: 22px; border-radius: 50%; background: var(--border); color: var(--muted); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 4px; transition: background .3s, color .3s; }
   .step .step-label { font-size: 10px; color: var(--muted); letter-spacing: .5px; line-height: 1.3; }
   .step.active { background: #1f1a0f; }
   .step.active .step-num { background: var(--gold); color: #0d0d0d; }
@@ -150,17 +136,10 @@
   .step.done { background: rgba(200,151,58,0.05); }
   .step.done .step-num { background: rgba(200,151,58,0.3); color: var(--gold); }
   .step.done .step-label { color: var(--cream); }
-
-  /* Combine step panels */
   .combine-panel { display: none; }
   .combine-panel.active { display: block; }
-
-  /* Size step */
   .combine-size-grid { display: flex; gap: 10px; }
-  .combine-size-option {
-    flex: 1; background: var(--card); border: 2px solid var(--border); border-radius: 16px;
-    padding: 18px 10px; cursor: pointer; text-align: center; transition: all .2s;
-  }
+  .combine-size-option { flex: 1; background: var(--card); border: 2px solid var(--border); border-radius: 16px; padding: 18px 10px; cursor: pointer; text-align: center; transition: all .2s; }
   .combine-size-option:hover { border-color: var(--gold); }
   .combine-size-option.selected { border-color: var(--gold); background: #1f1a0f; }
   .combine-size-option .cso-icon { font-size: 32px; margin-bottom: 8px; }
@@ -168,21 +147,9 @@
   .combine-size-option .cso-price { font-size: 11px; color: var(--muted); }
   .combine-size-option.selected .cso-name { color: var(--gold); }
   .combine-size-option.selected .cso-price { color: var(--gold-light); }
-  .step-next-btn {
-    display: block; width: 100%; margin-top: 16px; padding: 14px;
-    background: var(--gold); color: #0d0d0d; border: none; border-radius: 12px;
-    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700;
-    cursor: pointer; transition: opacity .2s;
-  }
+  .step-next-btn { display: block; width: 100%; margin-top: 16px; padding: 14px; background: var(--gold); color: #0d0d0d; border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity .2s; }
   .step-next-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-
-  /* Pizza selection for combine */
-  .combine-slot-mini {
-    background: var(--card); border: 2px dashed var(--border); border-radius: 14px;
-    padding: 14px 16px; display: flex; align-items: center; gap: 12px;
-    margin-bottom: 16px; min-height: 70px;
-    transition: border-color .2s, border-style .2s;
-  }
+  .combine-slot-mini { background: var(--card); border: 2px dashed var(--border); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; margin-bottom: 16px; min-height: 70px; transition: border-color .2s, border-style .2s; }
   .combine-slot-mini.filled { border-style: solid; border-color: var(--gold); }
   .combine-slot-mini .slot-num { width: 28px; height: 28px; border-radius: 50%; background: var(--border); color: var(--muted); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .combine-slot-mini.filled .slot-num { background: var(--gold); color: #0d0d0d; }
@@ -192,13 +159,8 @@
   .combine-slot-mini .slot-pizza-price { font-size: 12px; color: var(--gold); }
   .combine-slot-mini .slot-emoji { font-size: 22px; }
   .slot-clear-btn { background: none; border: none; color: var(--muted); font-size: 18px; cursor: pointer; padding: 4px; flex-shrink: 0; }
-
   .combine-pizza-list { display: flex; flex-direction: column; gap: 8px; }
-  .combine-pizza-row {
-    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 12px 14px; display: flex; align-items: center; gap: 10px;
-    cursor: pointer; transition: border-color .2s, background .2s;
-  }
+  .combine-pizza-row { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: border-color .2s, background .2s; }
   .combine-pizza-row:hover:not(.disabled) { border-color: var(--gold); background: #1a1500; }
   .combine-pizza-row.disabled { opacity: 0.35; cursor: not-allowed; }
   .combine-pizza-row.in-slot-1 { border-color: var(--gold); background: #1a1500; }
@@ -211,17 +173,10 @@
   .cpr-slot-badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; flex-shrink: 0; }
   .cpr-slot-badge.s1 { background: rgba(200,151,58,0.2); color: var(--gold); }
   .cpr-slot-badge.s2 { background: rgba(232,184,96,0.2); color: #e8b860; }
-
-  /* Combine summary */
-  .combine-summary {
-    background: linear-gradient(135deg, #1f1200, #1c1c1c); border: 1px solid var(--gold);
-    border-radius: 16px; padding: 20px; margin-top: 8px;
-  }
+  .combine-summary { background: linear-gradient(135deg, #1f1200, #1c1c1c); border: 1px solid var(--gold); border-radius: 16px; padding: 20px; margin-top: 8px; }
   .cs-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--cream); margin-bottom: 12px; }
   .cs-halves { display: flex; gap: 8px; margin-bottom: 16px; }
-  .cs-half {
-    flex: 1; background: var(--card); border-radius: 12px; padding: 12px 10px; text-align: center;
-  }
+  .cs-half { flex: 1; background: var(--card); border-radius: 12px; padding: 12px 10px; text-align: center; }
   .cs-half .ch-emoji { font-size: 24px; }
   .cs-half .ch-name { font-size: 12px; font-weight: 600; color: var(--cream); margin-top: 4px; }
   .cs-half .ch-price { font-size: 11px; color: var(--muted); }
@@ -233,19 +188,15 @@
   .btn-add-combo { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--green); color: #fff; border: none; border-radius: 12px; padding: 14px; width: 100%; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; }
   .btn-restart { display: block; width: 100%; margin-top: 10px; padding: 10px; background: none; border: 1px solid var(--border); color: var(--muted); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; }
 
-  /* ===================== BEBIDAS TAB ===================== */
+  /* BEBIDAS */
   .drink-grid { display: flex; flex-direction: column; gap: 8px; }
-  .drink-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-    padding: 14px 16px; display: flex; align-items: center; gap: 12px;
-  }
+  .drink-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
   .drink-card.in-cart { border-color: rgba(200,151,58,0.5); }
   .drink-emoji { font-size: 26px; width: 44px; height: 44px; background: var(--surface); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .drink-info { flex: 1; }
   .drink-name { font-size: 14px; font-weight: 600; color: var(--cream); }
   .drink-desc { font-size: 11px; color: var(--muted); line-height: 1.4; margin-top: 1px; }
   .drink-price { font-size: 14px; font-weight: 700; color: var(--gold); flex-shrink: 0; margin-right: 8px; }
-  /* Qty control for drinks */
   .drink-qty { display: flex; align-items: center; gap: 0; flex-shrink: 0; }
   .dqty-btn { width: 32px; height: 32px; border-radius: 50%; border: none; font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform .1s; }
   .dqty-btn:active { transform: scale(0.88); }
@@ -253,7 +204,7 @@
   .dqty-minus { background: rgba(192,57,43,0.2); color: var(--red-light); margin-right: 6px; }
   .dqty-count { min-width: 20px; text-align: center; font-size: 15px; font-weight: 700; color: var(--cream); }
 
-  /* ===================== CART ===================== */
+  /* CART */
   .cart-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: var(--surface); border-top: 1px solid var(--border); padding: 12px 20px 20px; z-index: 200; display: none; }
   .cart-bar.visible { display: block; }
   .cart-bar-inner { display: flex; align-items: center; gap: 12px; }
@@ -263,10 +214,10 @@
   .cart-summary .total { font-size: 16px; font-weight: 700; color: var(--gold); }
   .btn-whatsapp { display: flex; align-items: center; gap: 8px; background: var(--green); color: #fff; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 14px; padding: 13px 20px; border: none; border-radius: 14px; cursor: pointer; flex-shrink: 0; }
 
-  /* CART MODAL */
+  /* MODAL */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 300; align-items: flex-end; justify-content: center; }
   .modal-overlay.open { display: flex; }
-  .modal { background: var(--surface); border-radius: 24px 24px 0 0; width: 100%; max-width: 480px; max-height: 80vh; overflow-y: auto; padding: 0 0 32px; border-top: 1px solid var(--border); }
+  .modal { background: var(--surface); border-radius: 24px 24px 0 0; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; padding: 0 0 32px; border-top: 1px solid var(--border); }
   .modal-handle { width: 40px; height: 4px; background: var(--border); border-radius: 2px; margin: 14px auto 20px; }
   .modal-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--cream); padding: 0 20px; margin-bottom: 16px; }
   .cart-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 20px; border-bottom: 1px solid var(--border); }
@@ -279,18 +230,80 @@
   .cart-total-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-top: 1px solid var(--border); }
   .cart-total-label { font-size: 14px; color: var(--muted); }
   .cart-grand-total { font-size: 22px; font-weight: 700; color: var(--gold); }
+
+  /* CUSTOMER INFO — nuevo */
+  .customer-info-section {
+    margin: 0 20px 16px;
+    background: #111;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .customer-info-header {
+    background: #1a1300;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 14px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .customer-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .customer-field:last-child { border-bottom: none; }
+  .customer-field-icon { font-size: 16px; flex-shrink: 0; width: 20px; text-align: center; }
+  .customer-field input, .customer-field textarea {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    width: 100%;
+    outline: none;
+    resize: none;
+  }
+  .customer-field input::placeholder, .customer-field textarea::placeholder { color: var(--muted); }
+  .customer-field.required-field .customer-field-icon::after {
+    content: '*';
+    color: var(--red-light);
+    font-size: 10px;
+    vertical-align: super;
+  }
+
+  /* Status de envío */
+  .send-status {
+    margin: 0 20px 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    display: none;
+    align-items: center;
+    gap: 8px;
+  }
+  .send-status.sending { display: flex; background: rgba(200,151,58,0.1); border: 1px solid rgba(200,151,58,0.3); color: var(--gold); }
+  .send-status.success { display: flex; background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.3); color: #25D366; }
+  .send-status.error { display: flex; background: rgba(192,57,43,0.1); border: 1px solid rgba(192,57,43,0.3); color: var(--red-light); }
+  .status-spinner { width: 14px; height: 14px; border: 2px solid rgba(200,151,58,0.3); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0; }
+
   .modal-note { margin: 0 20px 16px; background: #1a1200; border: 1px solid rgba(200,151,58,0.3); border-radius: 10px; padding: 10px 14px; }
   .modal-note label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; }
   .modal-note textarea { background: none; border: none; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 13px; width: 100%; resize: none; outline: none; min-height: 60px; }
   .btn-send-order { display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--green); color: #fff; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px; padding: 16px; border: none; border-radius: 14px; cursor: pointer; width: calc(100% - 40px); margin: 0 20px; }
+  .btn-send-order:disabled { opacity: 0.5; cursor: not-allowed; }
   .btn-clear-cart { display: block; background: none; border: 1px solid var(--border); color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 10px; border-radius: 10px; cursor: pointer; width: calc(100% - 40px); margin: 10px 20px 0; text-align: center; }
+  .field-error { color: var(--red-light); font-size: 11px; padding: 0 14px 8px; }
 
   /* ABOUT */
   .about-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 12px; }
   .about-card h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--cream); margin-bottom: 8px; }
   .about-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
   .about-card a { color: var(--gold); text-decoration: none; }
-
   .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
   .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
   .empty-state p { font-size: 14px; line-height: 1.6; }
@@ -334,11 +347,9 @@
   <button class="tab-btn" onclick="showTab('nosotros')">📍 Nosotros</button>
 </div>
 
-<!-- =================== PIZZAS =================== -->
+<!-- PIZZAS -->
 <div id="tab-pizzas" class="section active">
   <div class="section-title">Nuestras Pizzas</div>
-
-  <!-- Size selector con precios -->
   <div class="size-selector" id="sizeSelector">
     <button class="size-btn" onclick="setSize('pequeña')" data-size="pequeña">
       <span class="size-check">✓</span>
@@ -359,61 +370,28 @@
       <span class="sz-price" id="sp-grande">desde $52k</span>
     </button>
   </div>
-
   <div id="pizzaList"></div>
 </div>
 
-<!-- =================== COMBINAR =================== -->
+<!-- COMBINAR -->
 <div id="tab-combinar" class="section">
-
-  <!-- Steps bar -->
   <div class="steps-bar">
-    <div class="step active" id="step-ind-1">
-      <div class="step-num">1</div>
-      <div class="step-label">Elige<br>tamaño</div>
-    </div>
-    <div class="step" id="step-ind-2">
-      <div class="step-num">2</div>
-      <div class="step-label">Mitad<br>1</div>
-    </div>
-    <div class="step" id="step-ind-3">
-      <div class="step-num">3</div>
-      <div class="step-label">Mitad<br>2</div>
-    </div>
-    <div class="step" id="step-ind-4">
-      <div class="step-num">4</div>
-      <div class="step-label">Tu<br>pedido</div>
-    </div>
+    <div class="step active" id="step-ind-1"><div class="step-num">1</div><div class="step-label">Elige<br>tamaño</div></div>
+    <div class="step" id="step-ind-2"><div class="step-num">2</div><div class="step-label">Mitad<br>1</div></div>
+    <div class="step" id="step-ind-3"><div class="step-num">3</div><div class="step-label">Mitad<br>2</div></div>
+    <div class="step" id="step-ind-4"><div class="step-num">4</div><div class="step-label">Tu<br>pedido</div></div>
   </div>
-
-  <!-- PANEL 1: Tamaño -->
   <div class="combine-panel active" id="cpanel-1">
     <div class="section-title" style="margin-bottom:16px">¿Qué tamaño?</div>
     <div class="combine-size-grid">
-      <div class="combine-size-option" onclick="selectCombineSize('pequeña', this)">
-        <div class="cso-icon">🍕</div>
-        <div class="cso-name">Pequeña</div>
-        <div class="cso-price">desde $20.000</div>
-      </div>
-      <div class="combine-size-option selected" onclick="selectCombineSize('mediana', this)">
-        <div class="cso-icon" style="font-size:40px">🍕</div>
-        <div class="cso-name">Mediana</div>
-        <div class="cso-price">desde $38.000</div>
-      </div>
-      <div class="combine-size-option" onclick="selectCombineSize('grande', this)">
-        <div class="cso-icon" style="font-size:44px">🍕</div>
-        <div class="cso-name">Grande</div>
-        <div class="cso-price">desde $52.000</div>
-      </div>
+      <div class="combine-size-option" onclick="selectCombineSize('pequeña', this)"><div class="cso-icon">🍕</div><div class="cso-name">Pequeña</div><div class="cso-price">desde $20.000</div></div>
+      <div class="combine-size-option selected" onclick="selectCombineSize('mediana', this)"><div class="cso-icon" style="font-size:40px">🍕</div><div class="cso-name">Mediana</div><div class="cso-price">desde $38.000</div></div>
+      <div class="combine-size-option" onclick="selectCombineSize('grande', this)"><div class="cso-icon" style="font-size:44px">🍕</div><div class="cso-name">Grande</div><div class="cso-price">desde $52.000</div></div>
     </div>
     <button class="step-next-btn" onclick="goToStep(2)">Elegir pizzas →</button>
   </div>
-
-  <!-- PANEL 2 & 3: Elegir mitades -->
   <div class="combine-panel" id="cpanel-2">
     <div class="section-title" style="margin-bottom:14px">Elige tus dos mitades</div>
-
-    <!-- Slot 1 -->
     <div class="combine-slot-mini" id="cslot-1">
       <div class="slot-num">1</div>
       <div class="slot-content">
@@ -424,8 +402,6 @@
       <span class="slot-emoji" id="cslot1-emoji"></span>
       <button class="slot-clear-btn" id="cslot1-clear" onclick="clearSlot(1)" style="display:none">✕</button>
     </div>
-
-    <!-- Slot 2 -->
     <div class="combine-slot-mini" id="cslot-2">
       <div class="slot-num">2</div>
       <div class="slot-content">
@@ -436,52 +412,32 @@
       <span class="slot-emoji" id="cslot2-emoji"></span>
       <button class="slot-clear-btn" id="cslot2-clear" onclick="clearSlot(2)" style="display:none">✕</button>
     </div>
-
     <button class="step-next-btn" id="btn-go-summary" onclick="goToStep(4)" disabled>Ver resumen y precio →</button>
-
     <div class="cat-label" style="margin-top:20px">Pizzas combinables</div>
     <div class="combine-pizza-list" id="combineList"></div>
   </div>
-
-  <!-- PANEL 4: Resumen y confirmar -->
   <div class="combine-panel" id="cpanel-4">
     <div class="combine-summary" id="combineSummary"></div>
     <button class="btn-restart" onclick="restartCombine()">← Cambiar combinación</button>
   </div>
-
 </div>
 
-<!-- =================== BEBIDAS =================== -->
+<!-- BEBIDAS -->
 <div id="tab-bebidas" class="section">
   <div class="section-title">Bebidas</div>
-  <div class="section-desc">Toca <strong style="color:var(--gold)">+</strong> para agregar al pedido. Puedes pedir varias unidades.</div>
+  <div class="section-desc">Toca <strong style="color:var(--gold)">+</strong> para agregar al pedido.</div>
   <div class="drink-grid" id="drinkList"></div>
 </div>
 
-<!-- =================== NOSOTROS =================== -->
+<!-- NOSOTROS -->
 <div id="tab-nosotros" class="section">
   <div class="section-title">Aki Tu Pizza</div>
   <div class="section-desc">Pizzería artesanal en el corazón de Piedecuesta.</div>
-  <div class="about-card">
-    <h3>📍 Ubicación</h3>
-    <p>Piedecuesta, Santander, Colombia.<br><a href="https://www.google.com/maps/place/Aki+Tu+Pizza+-+Pizzer%C3%ADa+Artesanal+en+Piedecuesta/@7.0004044,-73.0565809,17z" target="_blank">Ver en Google Maps →</a></p>
-  </div>
-  <div class="about-card">
-    <h3>📞 Contacto</h3>
-    <p>WhatsApp: <a href="https://wa.me/573053698712">+57 305 369 8712</a></p>
-  </div>
-  <div class="about-card">
-    <h3>🔀 Pizza combinada</h3>
-    <p>Mitad de cada pizza. Se cobra el precio de la mayor. Algunas pizzas especiales no combinan.</p>
-  </div>
-  <div class="about-card">
-    <h3>🍫 Postre</h3>
-    <p><strong style="color:var(--cream)">Dolce Peccato</strong> — Pastel de chocolate: <strong style="color:var(--gold)">$10.000</strong></p>
-  </div>
-  <div class="about-card">
-    <h3>🧀 Adicional de queso</h3>
-    <p>Pequeña: $6.000 &nbsp;|&nbsp; Mediana: $8.000 &nbsp;|&nbsp; Grande: $11.500</p>
-  </div>
+  <div class="about-card"><h3>📍 Ubicación</h3><p>Piedecuesta, Santander, Colombia.<br><a href="https://www.google.com/maps/place/Aki+Tu+Pizza+-+Pizzer%C3%ADa+Artesanal+en+Piedecuesta/@7.0004044,-73.0565809,17z" target="_blank">Ver en Google Maps →</a></p></div>
+  <div class="about-card"><h3>📞 Contacto</h3><p>WhatsApp: <a href="https://wa.me/573053698712">+57 305 369 8712</a></p></div>
+  <div class="about-card"><h3>🔀 Pizza combinada</h3><p>Mitad de cada pizza. Se cobra el precio de la mayor. Algunas pizzas especiales no combinan.</p></div>
+  <div class="about-card"><h3>🍫 Postre</h3><p><strong style="color:var(--cream)">Dolce Peccato</strong> — Pastel de chocolate: <strong style="color:var(--gold)">$10.000</strong></p></div>
+  <div class="about-card"><h3>🧀 Adicional de queso</h3><p>Pequeña: $6.000 &nbsp;|&nbsp; Mediana: $8.000 &nbsp;|&nbsp; Grande: $11.500</p></div>
 </div>
 
 <!-- Cart Bar -->
@@ -509,11 +465,37 @@
       <span class="cart-total-label">Total estimado</span>
       <span class="cart-grand-total" id="cartGrandTotal">$0</span>
     </div>
+
+    <!-- CAMPOS NOMBRE Y DIRECCIÓN — nuevo -->
+    <div class="customer-info-section">
+      <div class="customer-info-header">📋 Datos del pedido</div>
+      <div class="customer-field required-field">
+        <span class="customer-field-icon">👤</span>
+        <input type="text" id="customerName" placeholder="Tu nombre (obligatorio)" maxlength="60" />
+      </div>
+      <div class="customer-field required-field">
+        <span class="customer-field-icon">📍</span>
+        <input type="text" id="customerAddress" placeholder="Dirección de entrega (obligatorio)" maxlength="120" />
+      </div>
+      <div class="customer-field">
+        <span class="customer-field-icon">📱</span>
+        <input type="tel" id="customerPhone" placeholder="Teléfono (opcional)" maxlength="20" />
+      </div>
+    </div>
+    <div id="fieldError" class="field-error" style="display:none">⚠️ Por favor ingresa tu nombre y dirección.</div>
+
     <div class="modal-note">
       <label>📝 Nota (opcional)</label>
-      <textarea id="orderNote" placeholder="Ej: sin cebolla, extra salsa, dirección..."></textarea>
+      <textarea id="orderNote" placeholder="Ej: sin cebolla, extra salsa, referencia del lugar..."></textarea>
     </div>
-    <button class="btn-send-order" onclick="sendToWhatsApp()">
+
+    <!-- Status de envío a Sheets -->
+    <div class="send-status" id="sendStatus">
+      <div class="status-spinner" id="statusSpinner"></div>
+      <span id="statusText">Guardando pedido...</span>
+    </div>
+
+    <button class="btn-send-order" id="btnSendOrder" onclick="sendOrder()">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.07 1.5 5.786L0 24l6.34-1.47A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 0 1-5.015-1.378l-.36-.213-3.73.866.9-3.617-.234-.373A9.77 9.77 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
       Enviar pedido por WhatsApp
     </button>
@@ -522,6 +504,10 @@
 </div>
 
 <script>
+// ===================== CONFIGURACIÓN =====================
+// 🔧 REEMPLAZA esta URL con la de tu Apps Script desplegado
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx2xQDGeOmpQJa8NUo9nVYkuqESLgNjleXKXbv9V_CtrQg8wZ8KkprVSJJQwMzIDcQn/exec';
+
 // ===================== DATA =====================
 const PIZZAS = {
   temporada: [
@@ -628,7 +614,7 @@ let currentSize = 'mediana';
 let combineSize = 'mediana';
 let combineSlots = [null, null];
 let currentCombineStep = 1;
-// drinkQty tracked via cart items
+
 function getDrinkQty(id) {
   const item = cart.find(c => c.id === 'beb_' + id);
   return item ? item.qty : 0;
@@ -664,7 +650,6 @@ function renderPizzas() {
       if (pizza.tags.includes('veggie')) tagHtml += '<span class="tag tag-veggie">Vegetariana</span>';
       if (pizza.tags.includes('hot')) tagHtml += '<span class="tag tag-hot">🌶 Picante</span>';
       if (pizza.tags.includes('seafood')) tagHtml += '<span class="tag tag-seafood">Mariscos</span>';
-
       const qtyHtml = unavailable ? `<span style="font-size:12px;color:var(--muted)">No disponible en este tamaño</span>` :
         qty > 0
           ? `<div class="qty-control">
@@ -673,7 +658,6 @@ function renderPizzas() {
                <button class="qty-btn" onclick="changePizzaQty('${pizza.id}','${cat.key}',1)">+</button>
              </div>`
           : `<button class="qty-btn" style="border-radius:8px;width:auto;padding:0 14px;gap:4px;font-size:13px;border-color:var(--gold);background:var(--gold);color:#0d0d0d" onclick="changePizzaQty('${pizza.id}','${cat.key}',1)">+ Agregar</button>`;
-
       html += `
         <div class="pizza-card ${qty>0?'in-cart':''}" id="pcard-${pizza.id}">
           <div class="pizza-emoji">${pizza.emoji}</div>
@@ -729,7 +713,6 @@ function selectCombineSize(size, el) {
 function goToStep(step) {
   currentCombineStep = step;
   document.querySelectorAll('.combine-panel').forEach(p => p.classList.remove('active'));
-  // Steps 2 and 3 share the same panel
   if (step === 2 || step === 3) {
     document.getElementById('cpanel-2').classList.add('active');
   } else {
@@ -779,9 +762,7 @@ function renderCombineList() {
   }
   container.innerHTML = html;
   updateCombineSlotUI();
-  // update continue button
-  const canContinue = combineSlots[0] && combineSlots[1];
-  document.getElementById('btn-go-summary').disabled = !canContinue;
+  document.getElementById('btn-go-summary').disabled = !(combineSlots[0] && combineSlots[1]);
 }
 
 function addToSlot(pizzaId) {
@@ -789,7 +770,7 @@ function addToSlot(pizzaId) {
   if (combineSlots[1] === pizzaId) { clearSlot(2); return; }
   if (!combineSlots[0]) combineSlots[0] = pizzaId;
   else if (!combineSlots[1]) combineSlots[1] = pizzaId;
-  else return; // both full
+  else return;
   renderCombineList();
 }
 
@@ -835,21 +816,12 @@ function renderCombineSummary() {
   const price2 = getPriceForSize(p2, combineSize) || 0;
   const finalPrice = Math.max(price1, price2);
   const sizeCap = combineSize.charAt(0).toUpperCase() + combineSize.slice(1);
-  const summary = document.getElementById('combineSummary');
-  summary.innerHTML = `
+  document.getElementById('combineSummary').innerHTML = `
     <div class="cs-title">🔀 Tu combinación — ${sizeCap}</div>
     <div class="cs-halves">
-      <div class="cs-half">
-        <div class="ch-emoji">${p1.emoji}</div>
-        <div class="ch-name">${p1.name}</div>
-        <div class="ch-price">${formatPrice(price1)}</div>
-      </div>
+      <div class="cs-half"><div class="ch-emoji">${p1.emoji}</div><div class="ch-name">${p1.name}</div><div class="ch-price">${formatPrice(price1)}</div></div>
       <div class="cs-divider">+</div>
-      <div class="cs-half">
-        <div class="ch-emoji">${p2.emoji}</div>
-        <div class="ch-name">${p2.name}</div>
-        <div class="ch-price">${formatPrice(price2)}</div>
-      </div>
+      <div class="cs-half"><div class="ch-emoji">${p2.emoji}</div><div class="ch-name">${p2.name}</div><div class="ch-price">${formatPrice(price2)}</div></div>
     </div>
     <div class="cs-pricing">
       <div class="cs-rule">Se cobra el precio de la pizza mayor</div>
@@ -941,6 +913,10 @@ function updateCartBar() {
 function openCart() {
   renderCartModal();
   document.getElementById('cartModal').classList.add('open');
+  // Limpiar estado previo
+  document.getElementById('sendStatus').className = 'send-status';
+  document.getElementById('fieldError').style.display = 'none';
+  document.getElementById('btnSendOrder').disabled = false;
 }
 
 function closeCartOnOverlay(e) {
@@ -987,19 +963,91 @@ function clearCart() {
   renderDrinks();
 }
 
-function sendToWhatsApp() {
-  if (cart.length === 0) return;
+// ===================== ENVIAR PEDIDO =====================
+async function sendOrder() {
+  const name = document.getElementById('customerName').value.trim();
+  const address = document.getElementById('customerAddress').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
   const note = document.getElementById('orderNote').value.trim();
-  let msg = '🍕 *Pedido - Aki Tu Pizza Piedecuesta*\n\n';
-  for (const item of cart) {
+  const errEl = document.getElementById('fieldError');
+
+  // Validar campos obligatorios
+  if (!name || !address) {
+    errEl.style.display = 'block';
+    document.getElementById('customerName').closest('.customer-info-section').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+  errEl.style.display = 'none';
+
+  const btn = document.getElementById('btnSendOrder');
+  const statusEl = document.getElementById('sendStatus');
+  btn.disabled = true;
+
+  // Mostrar estado enviando
+  statusEl.className = 'send-status sending';
+  document.getElementById('statusSpinner').style.display = 'block';
+  document.getElementById('statusText').textContent = 'Guardando pedido en el sistema...';
+
+  const total = cart.reduce((s,c) => s + c.price*c.qty, 0);
+  const itemsText = cart.map(item => {
     const size = item.size ? ` (${item.size})` : '';
     const qty = item.qty > 1 ? ` x${item.qty}` : '';
-    msg += `• ${item.name}${size}${qty}: ${formatPrice(item.price * item.qty)}\n`;
+    return `${item.name}${size}${qty}: ${formatPrice(item.price * item.qty)}`;
+  }).join(' | ');
+
+  const payload = {
+    fecha: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }),
+    nombre: name,
+    direccion: address,
+    telefono: phone || '',
+    items: itemsText,
+    total: total,
+    nota: note || ''
+  };
+
+  // Enviar a Google Sheets
+  let sheetsOk = false;
+  try {
+    const resp = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    // no-cors siempre retorna opaque, asumimos éxito si no lanza
+    sheetsOk = true;
+  } catch (err) {
+    console.warn('Google Sheets error:', err);
   }
-  msg += `\n💰 *Total estimado: ${formatPrice(cart.reduce((s,c)=>s+c.price*c.qty,0))}*`;
-  if (note) msg += `\n\n📝 Nota: ${note}`;
-  msg += '\n\n¡Gracias! 😊';
-  window.open(`https://wa.me/573053698712?text=${encodeURIComponent(msg)}`, '_blank');
+
+  if (sheetsOk) {
+    statusEl.className = 'send-status success';
+    document.getElementById('statusSpinner').style.display = 'none';
+    document.getElementById('statusText').textContent = '✅ Pedido guardado. Abriendo WhatsApp...';
+  } else {
+    statusEl.className = 'send-status error';
+    document.getElementById('statusSpinner').style.display = 'none';
+    document.getElementById('statusText').textContent = '⚠️ No se pudo guardar en el sistema, pero enviando por WhatsApp...';
+  }
+
+  // Armar mensaje WhatsApp con nombre y dirección
+  setTimeout(() => {
+    let msg = '🍕 *Pedido - Aki Tu Pizza Piedecuesta*\n\n';
+    msg += `👤 *Cliente:* ${name}\n`;
+    msg += `📍 *Dirección:* ${address}\n`;
+    if (phone) msg += `📱 *Teléfono:* ${phone}\n`;
+    msg += '\n';
+    for (const item of cart) {
+      const size = item.size ? ` (${item.size})` : '';
+      const qty = item.qty > 1 ? ` x${item.qty}` : '';
+      msg += `• ${item.name}${size}${qty}: ${formatPrice(item.price * item.qty)}\n`;
+    }
+    msg += `\n💰 *Total estimado: ${formatPrice(total)}*`;
+    if (note) msg += `\n\n📝 Nota: ${note}`;
+    msg += '\n\n¡Gracias! 😊';
+    window.open(`https://wa.me/573053698712?text=${encodeURIComponent(msg)}`, '_blank');
+    btn.disabled = false;
+  }, 1200);
 }
 
 // ===================== TABS =====================
